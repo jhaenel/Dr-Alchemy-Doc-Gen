@@ -1,3 +1,4 @@
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/2bc51fd762814c1c8a17f836e88e65de)](https://app.codacy.com/gh/jhaenel/Dr-Alchemy-Doc-Gen/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade)
 <table align="center">
   <tr>
     <td>
