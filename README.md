@@ -36,3 +36,85 @@ Even the best of codes can become enigmatic without proper documentation. The ob
 - Create more complex and insightful hierarchies, aggregations, and abstractions
 - Chat about the documentation
 - Generate a docs site
+
+# Setting Up the Development Environment
+
+## First Time Setup
+
+To set up a Python development environment, we'll use the built-in `venv` module, which is available in Python 3.3 and later.
+
+### 1. Ensure Python is Installed
+
+Before you begin, ensure you have Python installed:
+
+- **Linux/Unix**:
+  ```bash
+  python3 --version
+  ```
+
+- **Windows**:
+  ```bash
+  python --version
+  ```
+
+If Python isn't installed, download it from the [official Python website](https://www.python.org/downloads/).
+
+### 2. Create a Virtual Environment
+
+The virtual environment allows you to have an isolated space on your computer for Python projects, ensuring that each project can have its own set of dependencies.
+
+- **Linux/Unix**:
+  ```bash
+  python3 -m venv myenv
+  ```
+
+- **Windows**:
+  ```bash
+  python -m venv myenv
+  ```
+
+This command creates a virtual environment named `myenv`. You can replace `myenv` with any name you prefer.
+
+### 3. Activate the Virtual Environment
+
+Before installing any packages, you need to activate the virtual environment:
+
+- **Linux/Unix**:
+  ```bash
+  source myenv/bin/activate
+  ```
+
+- **Windows**:
+  ```bash
+  .\myenv\Scripts\activate
+  ```
+
+Once activated, your terminal or command prompt should show the name of the virtual environment, indicating that it's currently active.
+
+
+### 4. Install Your Dependencies
+
+```bash
+pip install -r requirements-dev.txt
+```
+
+
+### 5. Deactivate the Virtual Environment
+
+When done, deactivate your virtual environment:
+
+```bash
+deactivate
+```
+
+## Adding a requirement
+1. If not already done install pip-tools with `pip install pip-tools`
+2. Add a new dev requirements by adding the pip package name as a new line to `requirements-dev.in`
+3. Compile requirements with `pip-compile requirements-dev.in`
+4. Install dependencies with `pip install -r requirements-dev.txt`
+
+## Setting Editable mode
+If desired, using setup.py you can run  `pip install -e .`. You can read about the benefits here [stackoverflow](https://stackoverflow.com/questions/35064426/when-would-the-e-editable-option-be-useful-with-pip-install)
+
+## Running tests
+You can simply run all tests with `pytest`. Run a specific test file with `pytest path/to/file.py`
