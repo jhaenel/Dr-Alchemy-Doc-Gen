@@ -113,3 +113,5 @@ deactivate
 3. Compile requirements with `pip-compile requirements-dev.in`
 4. Install dependencies with `pip install -r requirements-dev.txt`
 
+## Setting Editable mode
+If desired, using setup.py you can run  `pip install -e .`. You can read about the benefits here [stackoverflow](https://stackoverflow.com/questions/35064426/when-would-the-e-editable-option-be-useful-with-pip-install)
