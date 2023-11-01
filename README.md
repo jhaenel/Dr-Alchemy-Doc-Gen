@@ -106,3 +106,10 @@ When done, deactivate your virtual environment:
 ```bash
 deactivate
 ```
+
+## Adding a requirement
+1. If not already done install pip-tools with `pip install pip-tools`
+2. Add a new dev requirements by adding the pip package name as a new line to `requirements-dev.in`
+3. Compile requirements with `pip-compile requirements-dev.in`
+4. Install dependencies with `pip install -r requirements-dev.txt`
+
