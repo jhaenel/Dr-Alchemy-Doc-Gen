@@ -31,3 +31,11 @@ def test_copy_file_src_does_not_exist(tmp_path):
 
     with pytest.raises(ValueError, match="Source is not a valid file"):
         copy_file(tmp_path / "nonexistent_file.txt", dest_dir)
+
+
+def test_copy_file_invalid_dest(tmp_path):
+    src_file = tmp_path / "source.txt"
+    src_file.write_text("Hello, World!")
+
+    with pytest.raises(ValueError, match="Destination is not a valid directory"):
+        copy_file(src_file, tmp_path / "nonexistent_dir")
