@@ -1,6 +1,6 @@
-<center>
-    <img src="https://github.com/jhaenel/Dr-Alchemy-Docs/blob/main/images/dr-alechemy.png?raw=true" alt="A confident woman mad scientist with African descent in a startup-like lab workspace, accompanied by a hovering self-writing quill." width="400"/>
-</center>
+<div style="display: flex; justify-content: center;">
+    <img src="https://github.com/jhaenel/Dr-Alchemy-Docs/blob/main/images/dr-alechemy.png?raw=true" alt="A confident woman mad scientist with African descent in a startup-like lab workspace, accompanied by a hovering self-writing quill." width="400" style="margin: auto;"/>
+</div>
 
 
 # Dr. Alchemy Docs
