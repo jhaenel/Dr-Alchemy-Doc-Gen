@@ -17,3 +17,7 @@ Even the best of codes can become enigmatic without proper documentation. The ob
   [] Only regenerate relevant changes
   [] Persist human added comments
   [] Prompt to verify relevant human-added comments are still fresh
+## future
+  - Create more complex and insightful hierarchies, aggregations, and abstractions
+  - Chat about the documentation
+  - Generate a docs site
