@@ -14,5 +14,5 @@ def test_copy_file_valid(tmp_path):
     copied_file = tmp_path / "dest" / "source.txt"
 
     assert os.path.exists(copied_file)
-    assert copied_path == copied_file
+    assert str(copied_path) == str(copied_file)
     assert copied_file.read_text() == "Hello, World!"
