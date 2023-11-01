@@ -12,11 +12,11 @@ Even the best of codes can become enigmatic without proper documentation. The ob
 
 # Roadmap
 ## v0
-  [] Generate a clone of a file with inline comments
-  [] Integrate as a VSCode extension
-  [] Only regenerate relevant changes
-  [] Persist human added comments
-  [] Prompt to verify relevant human-added comments are still fresh
+  - [ ] Generate a clone of a file with inline comments
+  - [ ] Integrate as a VSCode extension
+  - [ ] Only regenerate relevant changes
+  - [ ] Persist human added comments
+  - [ ] Prompt to verify relevant human-added comments are still fresh
 ## future
   - Create more complex and insightful hierarchies, aggregations, and abstractions
   - Chat about the documentation
