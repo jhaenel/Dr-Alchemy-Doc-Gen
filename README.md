@@ -23,6 +23,9 @@ Even the best of codes can become enigmatic without proper documentation. The ob
 - Code has a hierarchy, so should documentation
 - Neither humans nor AI can document code well alone
 
+# Contributing
+We welcome and encourage anyone who is inteeresting in contributing! Please read our contribution guide here [CONTRIBUTING.md](CONTRIBUTING.md)
+
 # Roadmap
 
 ## v0
