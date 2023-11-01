@@ -1,5 +1,7 @@
 import os
 
+import pytest
+
 from src.file_ops.copy_file import copy_file
 
 
@@ -16,3 +18,8 @@ def test_copy_file_valid(tmp_path):
     assert os.path.exists(copied_file)
     assert str(copied_path) == str(copied_file)
     assert copied_file.read_text() == "Hello, World!"
+
+
+def test_copy_file_invalid_src(tmp_path):
+    with pytest.raises(ValueError, match="Source is not a valid file"):
+        copy_file(str(tmp_path), tmp_path)
