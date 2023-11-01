@@ -115,3 +115,6 @@ deactivate
 
 ## Setting Editable mode
 If desired, using setup.py you can run  `pip install -e .`. You can read about the benefits here [stackoverflow](https://stackoverflow.com/questions/35064426/when-would-the-e-editable-option-be-useful-with-pip-install)
+
+## Running tests
+You can simply run all tests with `pytest`. Run a specific test file with `pytest path/to/file.py`
