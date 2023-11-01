@@ -10,3 +10,10 @@ Even the best of codes can become enigmatic without proper documentation. The ob
  - Code has a hierarchy, so should documentation
  - Neither humans nor AI can document code well alone
 
+# Roadmap
+## v0
+  [] Generate a clone of a file with inline comments
+  [] Integrate as a VSCode extension
+  [] Only regenerate relevant changes
+  [] Persist human added comments
+  [] Prompt to verify relevant human-added comments are still fresh
