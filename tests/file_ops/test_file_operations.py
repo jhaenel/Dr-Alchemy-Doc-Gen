@@ -61,3 +61,8 @@ def test_find_files_in_directory_with_no_files(tmp_path):
 
     files = find_files_in_directory(d)
     assert len(files) == 0
+
+
+def test_directory_does_not_exist(tmp_path):
+    with pytest.raises(ValueError, match="Provided path is not a valid directory"):
+        find_files_in_directory(tmp_path / "nonexistent_dir")
