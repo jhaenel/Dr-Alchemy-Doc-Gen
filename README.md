@@ -103,14 +103,28 @@ Once activated, your terminal or command prompt should show the name of the virt
 pip install -r requirements-dev.txt
 ```
 
+### 5. Set Open AI api key environmental variable
+- **Linux/Unix**:
+  ```bash
+    export OPENAI_API_KEY='your-api-key'
+  ```
 
-### 5. Deactivate the Virtual Environment
+- **Windows PowerShell**:
+  ```bash
+    $env:OPENAI_API_KEY="your-api-key"
+  ```
+
+
+### 6. Deactivate the Virtual Environment
 
 When done, deactivate your virtual environment:
 
 ```bash
 deactivate
 ```
+
+
+
 
 ## Adding a requirement
 1. If not already done install pip-tools with `pip install pip-tools`
