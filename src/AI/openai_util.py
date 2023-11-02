@@ -10,6 +10,7 @@ ENV_API_KEY = "OPENAI_API_KEY"
 SYSTEM_ROLE = "system"
 USER_ROLE = "user"
 SYSTEM_CONTENT = "You are a helpful assistant."
+TIMEOUT = 180
 
 
 def get_api_key():
@@ -36,7 +37,6 @@ def create_body(user_content):
 
 
 def send_request(headers, body):
-    connection = http.client.HTTPSConnection(API_HOST)
     connection.request("POST", API_ENDPOINT, body, headers)
     response = connection.getresponse()
     response_data = response.read()
@@ -45,6 +45,7 @@ def send_request(headers, body):
     if response.status != 200:
         raise Exception(f"Request failed: {response.status} {response.reason}")
     return response_data
+    connection = http.client.HTTPSConnection(API_HOST, timeout=TIMEOUT)
 
 
 def call_openai_api(content):
