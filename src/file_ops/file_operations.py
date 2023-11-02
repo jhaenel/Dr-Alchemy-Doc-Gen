@@ -1,8 +1,9 @@
 import os
 import shutil
+from typing import List
 
 
-def copy_file(src, dest_dir):
+def copy_file(src: str, dest_dir: str) -> str:
     if not os.path.isfile(src):
         raise ValueError("Source is not a valid file")
     if not os.path.isdir(dest_dir):
@@ -13,7 +14,7 @@ def copy_file(src, dest_dir):
     return dest_path
 
 
-def find_files_in_directory(directory: str):
+def find_files_in_directory(directory: str) -> List[str]:
     if not os.path.isdir(directory):
         raise ValueError("Provided path is not a valid directory")
 
@@ -24,7 +25,7 @@ def find_files_in_directory(directory: str):
     ]
 
 
-def copy_all_files(src, dest):
+def copy_all_files(src: str, dest: str) -> None:
     for dirpath, _, filenames in os.walk(src):
         dest_dir = os.path.join(dest, os.path.relpath(dirpath, src))
         os.makedirs(dest_dir, exist_ok=True)
