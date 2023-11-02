@@ -18,11 +18,11 @@ SYSTEM_CONTENT = "You are a staff software engineer."
 TIMEOUT = 180
 
 
-    api_key = os.environ.get(ENV_API_KEY)
-    if not api_key:
 def get_api_key() -> str:
+    if api_key := os.environ.get(ENV_API_KEY):
+        return api_key
+    else:
         raise ValueError(f"The '{ENV_API_KEY}' environment variable is not set.")
-    return api_key
 
 
 def create_headers(api_key: str) -> dict:
