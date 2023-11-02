@@ -22,3 +22,8 @@ def find_files_in_directory(directory: str):
         for f in os.listdir(directory)
         if os.path.isfile(os.path.join(directory, f))
     ]
+
+
+def copy_all_files(src_dir, dest_dir):
+    files_to_copy = find_files_in_directory(src_dir)
+    return [copy_file(file_path, dest_dir) for file_path in files_to_copy]
