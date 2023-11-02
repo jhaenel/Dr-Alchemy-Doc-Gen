@@ -11,3 +11,11 @@ def copy_file(src, dest_dir):
     dest_path = os.path.join(dest_dir, os.path.basename(src))
     shutil.copy2(src, dest_path)
     return dest_path
+
+
+def find_files_in_directory(directory: str):
+    return [
+        os.path.join(directory, f)
+        for f in os.listdir(directory)
+        if os.path.isfile(os.path.join(directory, f))
+    ]
