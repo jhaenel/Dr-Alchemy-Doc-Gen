@@ -3,7 +3,7 @@ import json
 import os
 import logging
 
-from src.util.requests import retry
+from src.util.requests import retry, exception_handler
 
 logging.basicConfig(level=logging.INFO)
 
@@ -57,6 +57,7 @@ def send_request(headers, body):
         connection.close()
 
 
+@exception_handler
 def call_openai_api(content):
     api_key = get_api_key()
     headers = create_headers(api_key)
@@ -68,12 +69,6 @@ def call_openai_api(content):
 # Example usage:
 if __name__ == "__main__":
     user_content = "Hello!"
-    try:
-        result = call_openai_api(user_content)
+    result = call_openai_api(user_content)
+    if result is not None:
         print(result)
-    except ValueError as e:
-        logging.error(f"Configuration error: {e}")
-    except http.client.HTTPException as e:
-        logging.error(f"HTTP error occurred after retries: {e}")
-    except Exception as e:
-        logging.error(f"An unexpected error occurred: {e}")

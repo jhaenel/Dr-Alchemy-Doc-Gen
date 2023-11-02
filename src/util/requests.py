@@ -1,4 +1,5 @@
 import time
+import http
 import logging
 from functools import wraps
 
@@ -36,3 +37,24 @@ def retry(exceptions, tries=MAX_RETRIES, delay=RETRY_BACKOFF_START, backoff=2):
         return wrapper
 
     return decorator
+
+
+def exception_handler(func):
+    """Decorator to handle exceptions raised by the function it decorates."""
+
+    @wraps(func)
+    def wrapper(*args, **kwargs):
+        try:
+            return func(*args, **kwargs)
+        except ValueError as e:
+            logging.error(f"Configuration error: {e}")
+        except http.client.HTTPException as e:
+            logging.error(f"HTTP error occurred after retries: {e}")
+        except Exception as e:
+            logging.error(f"An unexpected error occurred: {e}")
+            # Depending on how you want to handle exceptions,
+            # you might want to re-raise them, return None, or return a default value
+            # Here we are choosing to return None
+            return None
+
+    return wrapper
