@@ -1,9 +1,12 @@
 import http.client
 import json
 import os
+import logging
 
 from src.util.requests import retry
 
+# Set up basic logging
+logging.basicConfig(level=logging.INFO)
 
 API_HOST = "api.openai.com"
 API_ENDPOINT = "/v1/chat/completions"
@@ -69,5 +72,9 @@ if __name__ == "__main__":
     try:
         result = call_openai_api(user_content)
         print(result)
+    except ValueError as e:
+        logging.error(f"Configuration error: {e}")
+    except http.client.HTTPException as e:
+        logging.error(f"HTTP error occurred after retries: {e}")
     except Exception as e:
-        print(f"An error occurred: {e}")
+        logging.error(f"An unexpected error occurred: {e}")
