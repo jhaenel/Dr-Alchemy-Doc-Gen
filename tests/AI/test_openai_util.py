@@ -53,7 +53,7 @@ def test_send_request(mock_http_connection):
 
 
 @patch("src.AI.openai_util.send_request")
-def test_call_openai_api(mock_send_request):
+def test_call_openai_api(mock_send_request, mock_env_vars):
     mock_send_request.return_value = json.dumps({"result": "success"}).encode("utf-8")
     result = call_openai_api("Hello!")
     assert result == {"result": "success"}
