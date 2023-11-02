@@ -118,7 +118,7 @@ def test_copy_all_files_empty_directory(tmp_path):
 
     copy_all_files(src_dir, dest_dir)
     # make dest_dir from path to
-    assert len(list(dest_dir.iterdir())) == 0
+    assert not list(dest_dir.iterdir())
 
 
 def test_copy_all_files_recursively(tmp_path):
