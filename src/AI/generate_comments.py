@@ -8,7 +8,7 @@ Here is the code:
 """
 
 
-def generate_comments(code_to_comment: str):
+def generate_comments(code_to_comment: str) -> dict:
     comment_prompt = GENERATE_COMENTS_PROMPT + code_to_comment
     return call_openai_api(comment_prompt)
 
