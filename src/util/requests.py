@@ -29,7 +29,7 @@ def retry(exceptions, tries=MAX_RETRIES, delay=RETRY_BACKOFF_START, backoff=2):
                 except exceptions as e:
                     if attempt == tries - 1:
                         raise
-                    logging.warning(f"Retrying in {mdelay} seconds...")
+                    logging.warning(f"Retrying in {mdelay} seconds... with error {e}")
                     time.sleep(mdelay)
                     mdelay *= backoff
 
