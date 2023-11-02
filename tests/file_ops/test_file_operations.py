@@ -53,3 +53,11 @@ def test_find_files_in_directory_single(tmp_path):
     files = find_files_in_directory(d)
     assert len(files) == 1
     assert os.path.basename(files[0]) == "testfile.txt"
+
+
+def test_find_files_in_directory_with_no_files(tmp_path):
+    d = tmp_path / "sub"
+    d.mkdir()
+
+    files = find_files_in_directory(d)
+    assert len(files) == 0
