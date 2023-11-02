@@ -14,7 +14,7 @@ CONTENT_TYPE = "application/json"
 ENV_API_KEY = "OPENAI_API_KEY"
 SYSTEM_ROLE = "system"
 USER_ROLE = "user"
-SYSTEM_CONTENT = "You are a helpful assistant."
+SYSTEM_CONTENT = "You are a staff software engineer."
 TIMEOUT = 180
 
 
