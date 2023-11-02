@@ -119,3 +119,25 @@ def test_copy_all_files_empty_directory(tmp_path):
     copy_all_files(src_dir, dest_dir)
     # make dest_dir from path to
     assert len(list(dest_dir.iterdir())) == 0
+
+
+def test_copy_all_files_recursively(tmp_path):
+    src_dir = tmp_path / "src"
+    src_dir.mkdir()
+    sub_dir = src_dir / "sub"
+    sub_dir.mkdir()
+    sub_sub_dir = sub_dir / "subsub"
+    sub_sub_dir.mkdir()
+
+    (src_dir / "file1.txt").write_text("Content of file 1")
+    (sub_dir / "file2.txt").write_text("Content of file 2")
+    (sub_sub_dir / "file3.txt").write_text("Content of file 3")
+
+    dest_dir = tmp_path / "dest"
+    dest_dir.mkdir()
+
+    copy_all_files(src_dir, dest_dir)
+
+    assert os.path.isfile(dest_dir / "file1.txt")
+    assert os.path.isfile(dest_dir / "sub" / "file2.txt")
+    assert os.path.isfile(dest_dir / "sub" / "subsub" / "file3.txt")
