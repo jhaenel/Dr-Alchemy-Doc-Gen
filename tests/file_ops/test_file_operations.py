@@ -2,7 +2,7 @@ import os
 
 import pytest
 
-from src.file_ops.copy_file import copy_file
+from src.file_ops.file_operations import copy_file
 
 
 def test_copy_file_valid(tmp_path):
