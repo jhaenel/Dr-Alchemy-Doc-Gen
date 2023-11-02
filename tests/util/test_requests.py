@@ -22,7 +22,7 @@ def succeeds_on_nth_try(n):
 
 
 def test_retry_decorator(mocker):
-    mock_sleep = mocker.patch("time.sleep")
+    mocker.patch("time.sleep")
     test_func, call_count = succeeds_on_nth_try(3)
 
     # Apply the retry decorator
@@ -35,7 +35,6 @@ def test_retry_decorator(mocker):
     assert result == "Success"
 
     assert call_count[0] == 2  # Function should succeed on the 3rd try
-
 
 
 def test_retry_decorator_exceeds_max_retries(mocker):
@@ -64,4 +63,3 @@ def test_retry_decorator_exceeds_max_retries(mocker):
         decorated_func()
 
     assert test_func_mock.call_count == MAX_RETRIES
-
