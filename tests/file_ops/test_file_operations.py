@@ -5,6 +5,7 @@ import pytest
 from src.file_ops.file_operations import (
     copy_file,
     find_files_in_directory,
+    copy_all_files,
 )
 
 
@@ -80,3 +81,16 @@ def test_find_files_in_directory_with_no_files(tmp_path):
 def test_directory_does_not_exist(tmp_path):
     with pytest.raises(ValueError, match="Provided path is not a valid directory"):
         find_files_in_directory(tmp_path / "nonexistent_dir")
+
+
+def test_copy_all_files(tmp_path):
+    src_dir = tmp_path / "src"
+    src_dir.mkdir()
+    dest_dir = tmp_path / "dest"
+    dest_dir.mkdir()
+    p = src_dir / "testfile.txt"
+    p.write_text("content")
+
+    dest_paths = copy_all_files(src_dir, dest_dir)
+    assert len(dest_paths) == 1
+    assert os.path.isfile(dest_dir / "testfile.txt")
