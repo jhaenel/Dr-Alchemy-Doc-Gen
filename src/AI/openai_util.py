@@ -5,7 +5,6 @@ import logging
 
 from src.util.requests import retry
 
-# Set up basic logging
 logging.basicConfig(level=logging.INFO)
 
 API_HOST = "api.openai.com"
