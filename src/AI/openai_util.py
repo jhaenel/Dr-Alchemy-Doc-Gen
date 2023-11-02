@@ -54,3 +54,12 @@ def call_openai_api(content):
     response_data = send_request(headers, body)
     return json.loads(response_data)
 
+
+# Example usage:
+if __name__ == "__main__":
+    user_content = "Hello!"
+    try:
+        result = call_openai_api(user_content)
+        print(result)
+    except Exception as e:
+        print(f"An error occurred: {e}")
