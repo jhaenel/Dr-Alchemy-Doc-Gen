@@ -83,7 +83,7 @@ def test_directory_does_not_exist(tmp_path):
         find_files_in_directory(tmp_path / "nonexistent_dir")
 
 
-def test_copy_all_files(tmp_path):
+def test_copy_all_files_single(tmp_path):
     src_dir = tmp_path / "src"
     src_dir.mkdir()
     dest_dir = tmp_path / "dest"
@@ -94,6 +94,22 @@ def test_copy_all_files(tmp_path):
     dest_paths = copy_all_files(src_dir, dest_dir)
     assert len(dest_paths) == 1
     assert os.path.isfile(dest_dir / "testfile.txt")
+
+
+def test_copy_all_files_multiple(tmp_path):
+    src_dir = tmp_path / "src"
+    src_dir.mkdir()
+    dest_dir = tmp_path / "dest"
+    dest_dir.mkdir()
+    p1 = src_dir / "testfile1.txt"
+    p1.write_text("content")
+    p2 = src_dir / "testfile2.txt"
+    p2.write_text("content")
+
+    dest_paths = copy_all_files(src_dir, dest_dir)
+    assert len(dest_paths) == 2
+    assert os.path.isfile(dest_dir / "testfile1.txt")
+    assert os.path.isfile(dest_dir / "testfile2.txt")
 
 
 def test_copy_all_files_empty_directory(tmp_path):
