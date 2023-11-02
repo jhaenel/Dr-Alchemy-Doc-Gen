@@ -46,3 +46,11 @@ def send_request(headers, body):
         raise Exception(f"Request failed: {response.status} {response.reason}")
     return response_data
 
+
+def call_openai_api(content):
+    api_key = get_api_key()
+    headers = create_headers(api_key)
+    body = create_body(content)
+    response_data = send_request(headers, body)
+    return json.loads(response_data)
+
