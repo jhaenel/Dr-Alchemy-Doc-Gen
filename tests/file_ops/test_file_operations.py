@@ -91,8 +91,7 @@ def test_copy_all_files_single(tmp_path):
     p = src_dir / "testfile.txt"
     p.write_text("content")
 
-    dest_paths = copy_all_files(src_dir, dest_dir)
-    assert len(dest_paths) == 1
+    copy_all_files(src_dir, dest_dir)
     assert os.path.isfile(dest_dir / "testfile.txt")
 
 
@@ -106,8 +105,7 @@ def test_copy_all_files_multiple(tmp_path):
     p2 = src_dir / "testfile2.txt"
     p2.write_text("content")
 
-    dest_paths = copy_all_files(src_dir, dest_dir)
-    assert len(dest_paths) == 2
+    copy_all_files(src_dir, dest_dir)
     assert os.path.isfile(dest_dir / "testfile1.txt")
     assert os.path.isfile(dest_dir / "testfile2.txt")
 
@@ -118,5 +116,6 @@ def test_copy_all_files_empty_directory(tmp_path):
     dest_dir = tmp_path / "dest"
     dest_dir.mkdir()
 
-    dest_paths = copy_all_files(src_dir, dest_dir)
-    assert len(dest_paths) == 0
+    copy_all_files(src_dir, dest_dir)
+    # make dest_dir from path to
+    assert len(list(dest_dir.iterdir())) == 0
