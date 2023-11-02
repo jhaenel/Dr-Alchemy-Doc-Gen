@@ -94,3 +94,13 @@ def test_copy_all_files(tmp_path):
     dest_paths = copy_all_files(src_dir, dest_dir)
     assert len(dest_paths) == 1
     assert os.path.isfile(dest_dir / "testfile.txt")
+
+
+def test_copy_all_files_empty_directory(tmp_path):
+    src_dir = tmp_path / "src"
+    src_dir.mkdir()
+    dest_dir = tmp_path / "dest"
+    dest_dir.mkdir()
+
+    dest_paths = copy_all_files(src_dir, dest_dir)
+    assert len(dest_paths) == 0
