@@ -38,7 +38,7 @@ def test_retry_decorator(mocker):
 
 
 def test_retry_decorator_exceeds_max_retries(mocker):
-    mock_sleep = mocker.patch("time.sleep")
+    mocker.patch("time.sleep")
     test_func = always_fail
 
     # Apply the retry decorator
