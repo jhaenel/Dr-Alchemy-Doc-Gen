@@ -2,7 +2,10 @@ import os
 
 import pytest
 
-from src.file_ops.file_operations import copy_file
+from src.file_ops.file_operations import (
+    copy_file,
+    find_files_in_directory,
+)
 
 
 def test_copy_file_valid(tmp_path):
@@ -39,3 +42,14 @@ def test_copy_file_invalid_dest(tmp_path):
 
     with pytest.raises(ValueError, match="Destination is not a valid directory"):
         copy_file(src_file, tmp_path / "nonexistent_dir")
+
+
+def test_find_files_in_directory_single(tmp_path):
+    d = tmp_path / "sub"
+    d.mkdir()
+    p = d / "testfile.txt"
+    p.write_text("content")
+
+    files = find_files_in_directory(d)
+    assert len(files) == 1
+    assert os.path.basename(files[0]) == "testfile.txt"
