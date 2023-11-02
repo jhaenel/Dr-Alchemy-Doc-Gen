@@ -24,6 +24,9 @@ def find_files_in_directory(directory: str):
     ]
 
 
-def copy_all_files(src_dir, dest_dir):
-    files_to_copy = find_files_in_directory(src_dir)
-    return [copy_file(file_path, dest_dir) for file_path in files_to_copy]
+def copy_all_files(src, dest):
+    for dirpath, _, filenames in os.walk(src):
+        dest_dir = os.path.join(dest, os.path.relpath(dirpath, src))
+        os.makedirs(dest_dir, exist_ok=True)
+        for file in filenames:
+            shutil.copy2(os.path.join(dirpath, file), dest_dir)
