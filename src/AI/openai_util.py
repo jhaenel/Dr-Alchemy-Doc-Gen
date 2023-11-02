@@ -2,6 +2,9 @@ import http.client
 import json
 import os
 
+from src.util.requests import retry
+
+
 API_HOST = "api.openai.com"
 API_ENDPOINT = "/v1/chat/completions"
 API_MODEL = "gpt-3.5-turbo"
@@ -36,16 +39,20 @@ def create_body(user_content):
     )
 
 
+@retry(exceptions=(http.client.HTTPException,))
 def send_request(headers, body):
-    connection.request("POST", API_ENDPOINT, body, headers)
-    response = connection.getresponse()
-    response_data = response.read()
-    connection.close()
-
-    if response.status != 200:
-        raise Exception(f"Request failed: {response.status} {response.reason}")
-    return response_data
     connection = http.client.HTTPSConnection(API_HOST, timeout=TIMEOUT)
+    try:
+        connection.request("POST", API_ENDPOINT, body, headers)
+        response = connection.getresponse()
+        response_data = response.read()
+        if response.status != 200:
+            raise http.client.HTTPException(
+                f"Request failed: {response.status} {response.reason}"
+            )
+        return response_data
+    finally:
+        connection.close()
 
 
 def call_openai_api(content):
