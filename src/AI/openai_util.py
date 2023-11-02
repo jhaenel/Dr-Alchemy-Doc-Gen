@@ -18,18 +18,18 @@ SYSTEM_CONTENT = "You are a staff software engineer."
 TIMEOUT = 180
 
 
-def get_api_key():
     api_key = os.environ.get(ENV_API_KEY)
     if not api_key:
+def get_api_key() -> str:
         raise ValueError(f"The '{ENV_API_KEY}' environment variable is not set.")
     return api_key
 
 
-def create_headers(api_key):
+def create_headers(api_key: str) -> dict:
     return {"Content-Type": CONTENT_TYPE, "Authorization": f"Bearer {api_key}"}
 
 
-def create_body(user_content):
+def create_body(user_content: str) -> str:
     return json.dumps(
         {
             "model": API_MODEL,
@@ -42,7 +42,7 @@ def create_body(user_content):
 
 
 @retry(exceptions=(http.client.HTTPException,))
-def send_request(headers, body):
+def send_request(headers: dict, body: str) -> str:
     connection = http.client.HTTPSConnection(API_HOST, timeout=TIMEOUT)
     try:
         connection.request("POST", API_ENDPOINT, body, headers)
@@ -58,7 +58,7 @@ def send_request(headers, body):
 
 
 @exception_handler
-def call_openai_api(content):
+def call_openai_api(content: str) -> dict:
     api_key = get_api_key()
     headers = create_headers(api_key)
     body = create_body(content)
