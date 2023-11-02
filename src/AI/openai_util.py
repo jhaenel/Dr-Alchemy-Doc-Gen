@@ -1,5 +1,9 @@
+import http.client
+import json
 import os
 
+API_HOST = "api.openai.com"
+API_ENDPOINT = "/v1/chat/completions"
 API_MODEL = "gpt-3.5-turbo"
 CONTENT_TYPE = "application/json"
 ENV_API_KEY = "OPENAI_API_KEY"
@@ -29,4 +33,16 @@ def create_body(user_content):
             ],
         }
     )
+
+
+def send_request(headers, body):
+    connection = http.client.HTTPSConnection(API_HOST)
+    connection.request("POST", API_ENDPOINT, body, headers)
+    response = connection.getresponse()
+    response_data = response.read()
+    connection.close()
+
+    if response.status != 200:
+        raise Exception(f"Request failed: {response.status} {response.reason}")
+    return response_data
 
