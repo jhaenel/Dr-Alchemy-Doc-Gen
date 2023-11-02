@@ -1,8 +1,12 @@
+import json
+
 import pytest
+from unittest.mock import patch, Mock
 from src.AI.openai_util import (
     get_api_key,
     create_headers,
     create_body,
+    send_request,
 )
 
 # Constants for testing
@@ -32,4 +36,17 @@ def test_create_body():
     body = create_body(user_content)
     assert "gpt-3.5-turbo" in body
     assert "messages" in body
+
+
+@patch("http.client.HTTPSConnection")
+def test_send_request(mock_http_connection):
+    mock_response = Mock()
+    mock_response.read.return_value = json.dumps({"result": "success"}).encode("utf-8")
+    mock_response.status = 200
+    mock_http_connection.return_value.getresponse.return_value = mock_response
+
+    headers = create_headers(TEST_API_KEY)
+    body = create_body("Hello!")
+    response_data = send_request(headers, body)
+    assert json.loads(response_data) == {"result": "success"}
 
