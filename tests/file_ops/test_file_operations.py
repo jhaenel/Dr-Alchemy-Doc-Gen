@@ -91,8 +91,7 @@ def test_copy_all_files_single(tmp_path):
     p = src_dir / "testfile.txt"
     p.write_text("content")
 
-    dest_paths = copy_all_files(src_dir, dest_dir)
-    assert len(dest_paths) == 1
+    copy_all_files(src_dir, dest_dir)
     assert os.path.isfile(dest_dir / "testfile.txt")
 
 
@@ -106,8 +105,7 @@ def test_copy_all_files_multiple(tmp_path):
     p2 = src_dir / "testfile2.txt"
     p2.write_text("content")
 
-    dest_paths = copy_all_files(src_dir, dest_dir)
-    assert len(dest_paths) == 2
+    copy_all_files(src_dir, dest_dir)
     assert os.path.isfile(dest_dir / "testfile1.txt")
     assert os.path.isfile(dest_dir / "testfile2.txt")
 
@@ -118,5 +116,28 @@ def test_copy_all_files_empty_directory(tmp_path):
     dest_dir = tmp_path / "dest"
     dest_dir.mkdir()
 
-    dest_paths = copy_all_files(src_dir, dest_dir)
-    assert len(dest_paths) == 0
+    copy_all_files(src_dir, dest_dir)
+    # make dest_dir from path to
+    assert not list(dest_dir.iterdir())
+
+
+def test_copy_all_files_recursively(tmp_path):
+    src_dir = tmp_path / "src"
+    src_dir.mkdir()
+    sub_dir = src_dir / "sub"
+    sub_dir.mkdir()
+    sub_sub_dir = sub_dir / "subsub"
+    sub_sub_dir.mkdir()
+
+    (src_dir / "file1.txt").write_text("Content of file 1")
+    (sub_dir / "file2.txt").write_text("Content of file 2")
+    (sub_sub_dir / "file3.txt").write_text("Content of file 3")
+
+    dest_dir = tmp_path / "dest"
+    dest_dir.mkdir()
+
+    copy_all_files(src_dir, dest_dir)
+
+    assert os.path.isfile(dest_dir / "file1.txt")
+    assert os.path.isfile(dest_dir / "sub" / "file2.txt")
+    assert os.path.isfile(dest_dir / "sub" / "subsub" / "file3.txt")
