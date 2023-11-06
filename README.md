@@ -1,5 +1,6 @@
 [![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-2.1-4baaaa.svg)](code_of_conduct.md)
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/2bc51fd762814c1c8a17f836e88e65de)](https://app.codacy.com/gh/jhaenel/Dr-Alchemy-Doc-Gen/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade)
+[<img src="https://img.shields.io/badge/slack-@dralchemydocgen-yellow.svg?logo=slack">](https://join.slack.com/t/dralchemydocgen/shared_invite/zt-26ipm006b-PYMmrKEFDlPnVwMEQf~XGw) 
 <table align="center">
   <tr>
     <td>
