@@ -3,6 +3,8 @@ import shutil
 from typing import List
 
 def read_file(path: str) -> str:
+    if not os.path.isfile(path):
+        raise ValueError("Provided path is not a valid file")
 
     with open(path, "r") as f:
         return f.read()
