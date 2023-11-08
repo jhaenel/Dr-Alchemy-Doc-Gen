@@ -6,8 +6,14 @@ from src.file_ops.file_operations import (
     copy_file,
     find_files_in_directory,
     copy_all_files,
+    read_file
 )
 
+def test_read_file_valid(tmp_path):
+    p = tmp_path / "testfile.txt"
+    p.write_text("content")
+
+    assert read_file(p) == "content"
 
 def test_copy_file_valid(tmp_path):
     src_file = tmp_path / "source.txt"
