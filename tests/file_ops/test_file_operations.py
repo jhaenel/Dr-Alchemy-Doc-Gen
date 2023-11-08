@@ -15,6 +15,10 @@ def test_read_file_valid(tmp_path):
 
     assert read_file(p) == "content"
 
+def test_read_file_invalid(tmp_path):
+    with pytest.raises(ValueError, match="Provided path is not a valid file"):
+        read_file(tmp_path / "nonexistent_file.txt")
+
 def test_copy_file_valid(tmp_path):
     src_file = tmp_path / "source.txt"
     src_file.write_text("Hello, World!")
