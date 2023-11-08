@@ -2,6 +2,10 @@ import os
 import shutil
 from typing import List
 
+def read_file(path: str) -> str:
+
+    with open(path, "r") as f:
+        return f.read()
 
 def copy_file(src: str, dest_dir: str) -> str:
     if not os.path.isfile(src):
