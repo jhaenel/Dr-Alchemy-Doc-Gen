@@ -8,6 +8,8 @@ from src.file_ops.file_operations import (
     copy_all_files,
     read_file,
     replace_file,
+    write_file_content_for_machine,
+    create_machine_readable_copies,
 )
 
 
@@ -192,13 +194,37 @@ def test_replace_file_permission_denied(tmp_path):
     with pytest.raises(PermissionError):
         replace_file(p, "new content")
 
-def test_write_file_content_for_machines(tmp_path):
-    dest_file_path = tmp_path / 'dest.txt'
-    src_file_path = tmp_path / 'src.txt'
-    src_file_path.write_text('Hello\nWorld')
 
-    with open(dest_file_path, 'w') as dest_file:
+def test_write_file_content_for_machines(tmp_path):
+    dest_file_path = tmp_path / "dest.txt"
+    src_file_path = tmp_path / "src.txt"
+    src_file_path.write_text("Hello\nWorld")
+
+    with open(dest_file_path, "w") as dest_file:
         write_file_content_for_machine(dest_file, src_file_path)
 
-    assert dest_file_path.read_text() == 'File: {}\n1: Hello\n2: World'.format(src_file_path)
+    assert dest_file_path.read_text() == "File: {}\n1: Hello\n2: World".format(
+        src_file_path
+    )
 
+
+def test_create_machine_readable_copies(tmp_path):
+    src_dir = tmp_path / "src"
+    src_dir.mkdir()
+    (src_dir / "file1.txt").write_text("Hello\nWorld")
+    (src_dir / "file2.txt").write_text("Foo\nBar")
+
+    dest_dir = tmp_path / "dest"
+    dest_dir.mkdir()
+
+    create_machine_readable_copies(src_dir, dest_dir)
+
+    actual_content = (dest_dir / "machine_readable.txt").read_text()
+
+    expected_content_file1 = "File: {}\n1: Hello\n2: World".format(
+        src_dir / "file1.txt"
+    )
+    expected_content_file2 = "File: {}\n1: Foo\n2: Bar".format(src_dir / "file2.txt")
+
+    assert expected_content_file1 in actual_content
+    assert expected_content_file2 in actual_content
