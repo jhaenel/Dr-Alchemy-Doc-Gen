@@ -65,10 +65,12 @@ def call_openai_api(content: str) -> dict:
     response_data = send_request(headers, body)
     return json.loads(response_data)
 
+def parse_openai_response(response_data: dict) -> str:
+    return response_data["choices"][0]['message']["content"]
 
 # Example usage:
 if __name__ == "__main__":
     user_content = "Hello!"
     result = call_openai_api(user_content)
     if result is not None:
-        print(result)
+        print(parse_openai_response(result))
