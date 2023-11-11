@@ -1,4 +1,4 @@
-from src.AI.openai_util import call_openai_api
+from src.AI.openai_util import generate
 
 GENERATE_COMENTS_PROMPT = """
 Add any useful, insightful inline comments to the code below.
@@ -10,7 +10,7 @@ Here is the code:
 
 def generate_comments(code_to_comment: str) -> dict:
     comment_prompt = GENERATE_COMENTS_PROMPT + code_to_comment
-    return call_openai_api(comment_prompt)
+    return generate(comment_prompt)
 
 
 if __name__ == "__main__":
