@@ -30,6 +30,15 @@ def find_files_in_directory(directory: str) -> List[str]:
         if os.path.isfile(os.path.join(directory, f))
     ]
 
+def find_all_files_recursively(directory: str) -> List[str]:
+    if not os.path.isdir(directory):
+        raise ValueError("Provided path is not a valid directory")
+
+    return [
+        os.path.join(dirpath, f)
+        for dirpath, _, filenames in os.walk(directory)
+        for f in filenames
+    ]
 
 def copy_all_files(src: str, dest: str) -> None:
     for dirpath, _, filenames in os.walk(src):
