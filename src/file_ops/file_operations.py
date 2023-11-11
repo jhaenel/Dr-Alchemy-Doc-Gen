@@ -63,3 +63,14 @@ def write_file_content_for_machine(dest_file, src_file_path):
         for line_no, line in enumerate(src_file, start=1):
             dest_file.write(f'{line_no}: {line}')
 
+def create_machine_readable_copies(src: str, dest: str) -> None:
+    dest_file_path = os.path.join(dest, 'machine_readable.txt')
+    with open(dest_file_path, 'w') as dest_file:
+        for dirpath, _, filenames in os.walk(src):
+            for filename in filenames:
+                src_file_path = os.path.join(dirpath, filename)
+                try:
+                    write_file_content_for_machine(dest_file, src_file_path)
+                except UnicodeDecodeError:
+                    print(f'Non-unicodable file ignored: {src_file_path}')
+    
