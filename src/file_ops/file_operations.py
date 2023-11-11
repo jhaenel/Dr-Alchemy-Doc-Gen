@@ -40,6 +40,13 @@ def find_all_files_recursively(directory: str) -> List[str]:
         for f in filenames
     ]
 
+def replace_file(src:str, new_content:str) -> None:
+    if not os.path.isfile(src):
+        raise ValueError("Source is not a valid file")
+
+    with open(src, "w") as f:
+        f.write(new_content)
+
 def copy_all_files(src: str, dest: str) -> None:
     for dirpath, _, filenames in os.walk(src):
         dest_dir = os.path.join(dest, os.path.relpath(dirpath, src))
