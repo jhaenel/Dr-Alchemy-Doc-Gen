@@ -56,3 +56,10 @@ def copy_all_files(src: str, dest: str) -> None:
         os.makedirs(dest_dir, exist_ok=True)
         for file in filenames:
             shutil.copy2(os.path.join(dirpath, file), dest_dir)
+
+def write_file_content_for_machine(dest_file, src_file_path):
+    with open(src_file_path, 'r') as src_file:
+        dest_file.write(f'File: {src_file_path}\n')
+        for line_no, line in enumerate(src_file, start=1):
+            dest_file.write(f'{line_no}: {line}')
+
