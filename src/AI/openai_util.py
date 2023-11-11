@@ -66,9 +66,21 @@ def call_openai_api(content: str) -> dict:
     return json.loads(response_data)
 
 
+def parse_openai_response(response_data: dict) -> str:
+    return response_data["choices"][0]["message"]["content"]
+
+
+def generate(prompt: str) -> str:
+    result = call_openai_api(prompt)
+    if result is not None:
+        return parse_openai_response(result)
+    else:
+        raise ValueError("OpenAI API call failed")
+
+
 # Example usage:
 if __name__ == "__main__":
     user_content = "Hello!"
     result = call_openai_api(user_content)
     if result is not None:
-        print(result)
+        print(parse_openai_response(result))

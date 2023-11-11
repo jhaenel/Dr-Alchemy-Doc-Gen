@@ -8,6 +8,7 @@ from src.AI.openai_util import (
     create_body,
     send_request,
     call_openai_api,
+    parse_openai_response,
 )
 
 # Constants for testing
@@ -57,3 +58,28 @@ def test_call_openai_api(mock_send_request, mock_env_vars):
     mock_send_request.return_value = json.dumps({"result": "success"}).encode("utf-8")
     result = call_openai_api("Hello!")
     assert result == {"result": "success"}
+
+
+def test_parse_openai_response():
+    response_data = {
+        "id": "chatcmpl-123",
+        "object": "chat.completion",
+        "created": 1677652288,
+        "model": "gpt-3.5-turbo-0613",
+        "system_fingerprint": "fp_44709d6fcb",
+        "choices": [
+            {
+                "index": 0,
+                "message": {
+                    "role": "assistant",
+                    "content": "hello world",
+                },
+                "finish_reason": "stop",
+            }
+        ],
+        "usage": {"prompt_tokens": 9, "completion_tokens": 12, "total_tokens": 21},
+    }
+
+    expected_result = "hello world"
+    result = parse_openai_response(response_data)
+    assert result == expected_result
