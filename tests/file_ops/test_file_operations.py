@@ -171,3 +171,8 @@ def test_replace_file(tmp_path):
     replace_file(p, "new content")
 
     assert p.read_text() == "new content"
+
+def test_replace_file_dne(tmp_path):
+    with pytest.raises(ValueError, match="Source is not a valid file"):
+        replace_file(tmp_path / "nonexistent_file.txt", "new content")
+        
