@@ -2,10 +2,11 @@ import os
 import shutil
 from typing import List
 
+
 def read_file(path: str) -> str:
     if not os.path.isfile(path):
         raise ValueError("Provided path is not a valid file")
-    
+
     with open(path, "r") as f:
         return f.read()
 
@@ -20,12 +21,14 @@ def copy_file(src: str, dest_dir: str) -> str:
     shutil.copy2(src, dest_path)
     return dest_path
 
+
 def is_unicodable(path: str) -> bool:
     try:
         read_file(path)
         return True
     except UnicodeDecodeError:
         return False
+
 
 def find_all_files_recursively(directory: str) -> List[str]:
     if not os.path.isdir(directory):
@@ -38,12 +41,14 @@ def find_all_files_recursively(directory: str) -> List[str]:
         if is_unicodable(os.path.join(dirpath, f))
     ]
 
-def replace_file(src:str, new_content:str) -> None:
+
+def replace_file(src: str, new_content: str) -> None:
     if not os.path.isfile(src):
         raise ValueError("Source is not a valid file")
 
     with open(src, "w") as f:
         f.write(new_content)
+
 
 def copy_all_files(src: str, dest: str) -> None:
     for dirpath, _, filenames in os.walk(src):
