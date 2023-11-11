@@ -4,8 +4,7 @@ GENERATE_COMENTS_PROMPT = """
 Add any useful, insightful inline comments to the code below.
 Give me back the full unaltered code with your comments added.
 DO NOT ADD ANYTHING OTHER THAN COMMENTS.
-ONLY RESPOND WITH THE CODE AND COMMENTS INA PYTHON CODE.
-Do not put your response inside a code block. And there should be nothing before and nothing after.
+Your response should be a fucntioning file, dont add anything before or after that would break the code.
 Here is the code:
 
 """
