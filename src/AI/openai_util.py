@@ -65,8 +65,10 @@ def call_openai_api(content: str) -> dict:
     response_data = send_request(headers, body)
     return json.loads(response_data)
 
+
 def parse_openai_response(response_data: dict) -> str:
-    return response_data["choices"][0]['message']["content"]
+    return response_data["choices"][0]["message"]["content"]
+
 
 def generate(prompt: str) -> str:
     result = call_openai_api(prompt)
@@ -74,6 +76,7 @@ def generate(prompt: str) -> str:
         return parse_openai_response(result)
     else:
         raise ValueError("OpenAI API call failed")
+
 
 # Example usage:
 if __name__ == "__main__":

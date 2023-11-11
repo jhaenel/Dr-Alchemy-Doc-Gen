@@ -14,6 +14,7 @@ def generate_comments(code_to_comment: str) -> dict:
     comment_prompt = GENERATE_COMENTS_PROMPT + code_to_comment
     return generate(comment_prompt)
 
+
 if __name__ == "__main__":
     code_to_comment = """
     a = 5
