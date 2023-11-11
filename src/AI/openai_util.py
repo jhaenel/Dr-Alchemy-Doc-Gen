@@ -73,7 +73,7 @@ def generate(prompt: str) -> str:
     if result is not None:
         return parse_openai_response(result)
     else:
-        return None
+        raise ValueError("OpenAI API call failed")
 
 # Example usage:
 if __name__ == "__main__":
