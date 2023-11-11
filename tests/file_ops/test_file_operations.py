@@ -4,7 +4,7 @@ import pytest
 
 from src.file_ops.file_operations import (
     copy_file,
-    find_files_in_directory,
+    find_all_files_recursively,
     copy_all_files,
     read_file
 )
@@ -61,7 +61,7 @@ def test_find_files_in_directory_single(tmp_path):
     p = d / "testfile.txt"
     p.write_text("content")
 
-    files = find_files_in_directory(d)
+    files = find_all_files_recursively(d)
     assert len(files) == 1
     assert os.path.basename(files[0]) == "testfile.txt"
 
@@ -74,23 +74,23 @@ def test_find_files_in_directory_multiple(tmp_path):
     p2 = d / "testfile2.txt"
     p2.write_text("content")
 
-    files = find_files_in_directory(d)
+    files = find_all_files_recursively(d)
     assert len(files) == 2
-    assert os.path.basename(files[0]) == "testfile1.txt"
-    assert os.path.basename(files[1]) == "testfile2.txt"
+    assert os.path.basename(files[0]) in ["testfile1.txt","testfile2.txt"]
+    assert os.path.basename(files[1]) in ["testfile1.txt","testfile2.txt"]
 
 
 def test_find_files_in_directory_with_no_files(tmp_path):
     d = tmp_path / "sub"
     d.mkdir()
 
-    files = find_files_in_directory(d)
+    files = find_all_files_recursively(d)
     assert len(files) == 0
 
 
 def test_directory_does_not_exist(tmp_path):
     with pytest.raises(ValueError, match="Provided path is not a valid directory"):
-        find_files_in_directory(tmp_path / "nonexistent_dir")
+        find_all_files_recursively(tmp_path / "nonexistent_dir")
 
 
 def test_copy_all_files_single(tmp_path):
