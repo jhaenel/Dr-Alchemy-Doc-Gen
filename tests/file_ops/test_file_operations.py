@@ -191,3 +191,14 @@ def test_replace_file_permission_denied(tmp_path):
 
     with pytest.raises(PermissionError):
         replace_file(p, "new content")
+
+def test_write_file_content_for_machines(tmp_path):
+    dest_file_path = tmp_path / 'dest.txt'
+    src_file_path = tmp_path / 'src.txt'
+    src_file_path.write_text('Hello\nWorld')
+
+    with open(dest_file_path, 'w') as dest_file:
+        write_file_content_for_machine(dest_file, src_file_path)
+
+    assert dest_file_path.read_text() == 'File: {}\n1: Hello\n2: World'.format(src_file_path)
+
