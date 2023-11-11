@@ -7,3 +7,5 @@ def orchestrate():
         replace_file(src=file, new_content=generate_comments(read_file(file)))
 
 
+if __name__ == "__main__":
+    orchestrate()
