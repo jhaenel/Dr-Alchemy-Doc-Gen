@@ -79,6 +79,17 @@ def test_find_files_in_directory_multiple(tmp_path):
     assert os.path.basename(files[0]) in ["testfile1.txt","testfile2.txt"]
     assert os.path.basename(files[1]) in ["testfile1.txt","testfile2.txt"]
 
+def test_find_files_in_directory_recursively(tmp_path):
+    d = tmp_path / "sub"
+    d.mkdir()
+    sub_d = d / "subsub"
+    sub_d.mkdir()
+    p = sub_d / "testfile.txt"
+    p.write_text("content")
+
+    files = find_all_files_recursively(d)
+    assert len(files) == 1
+    assert os.path.basename(files[0]) == "testfile.txt"
 
 def test_find_files_in_directory_with_no_files(tmp_path):
     d = tmp_path / "sub"
