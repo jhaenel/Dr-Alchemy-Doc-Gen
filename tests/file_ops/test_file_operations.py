@@ -207,6 +207,15 @@ def test_write_file_content_for_machines(tmp_path):
         src_file_path
     )
 
+def test_write_file_content_for_machines_with_empty_file(tmp_path):
+    dest_file_path = tmp_path / "dest.txt"
+    src_file_path = tmp_path / "src.txt"
+    src_file_path.write_text("")
+
+    with open(dest_file_path, "w") as dest_file:
+        write_file_content_for_machine(dest_file, src_file_path)
+
+    assert dest_file_path.read_text() == "File: {}\n".format(src_file_path)
 
 def test_create_machine_readable_copies(tmp_path):
     src_dir = tmp_path / "src"
