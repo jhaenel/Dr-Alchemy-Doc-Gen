@@ -5,9 +5,11 @@ from typing import List
 def read_file(path: str) -> str:
     if not os.path.isfile(path):
         raise ValueError("Provided path is not a valid file")
-
-    with open(path, "r") as f:
-        return f.read()
+    try:
+        with open(path, "r") as f:
+            return f.read()
+    except UnicodeDecodeError:
+        return ""
 
 def copy_file(src: str, dest_dir: str) -> str:
     if not os.path.isfile(src):
