@@ -6,7 +6,8 @@ from src.file_ops.file_operations import (
     copy_file,
     find_all_files_recursively,
     copy_all_files,
-    read_file
+    read_file,
+    replace_file
 )
 
 def test_read_file_valid(tmp_path):
@@ -162,3 +163,11 @@ def test_copy_all_files_recursively(tmp_path):
     assert os.path.isfile(dest_dir / "file1.txt")
     assert os.path.isfile(dest_dir / "sub" / "file2.txt")
     assert os.path.isfile(dest_dir / "sub" / "subsub" / "file3.txt")
+
+def test_replace_file(tmp_path):
+    p = tmp_path / "testfile.txt"
+    p.write_text("content")
+
+    replace_file(p, "new content")
+
+    assert p.read_text() == "new content"
