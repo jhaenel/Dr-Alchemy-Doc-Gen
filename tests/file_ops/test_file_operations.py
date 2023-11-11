@@ -175,4 +175,12 @@ def test_replace_file(tmp_path):
 def test_replace_file_dne(tmp_path):
     with pytest.raises(ValueError, match="Source is not a valid file"):
         replace_file(tmp_path / "nonexistent_file.txt", "new content")
+
+def test_replace_file_permission_denied(tmp_path):
+    p = tmp_path / "testfile.txt"
+    p.write_text("content")
+    p.chmod(0o000)
+
+    with pytest.raises(PermissionError):
+        replace_file(p, "new content")
         
