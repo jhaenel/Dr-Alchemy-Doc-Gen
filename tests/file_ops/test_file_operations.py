@@ -7,8 +7,9 @@ from src.file_ops.file_operations import (
     find_all_files_recursively,
     copy_all_files,
     read_file,
-    replace_file
+    replace_file,
 )
+
 
 def test_read_file_valid(tmp_path):
     p = tmp_path / "testfile.txt"
@@ -16,9 +17,11 @@ def test_read_file_valid(tmp_path):
 
     assert read_file(p) == "content"
 
+
 def test_read_file_invalid(tmp_path):
     with pytest.raises(ValueError, match="Provided path is not a valid file"):
         read_file(tmp_path / "nonexistent_file.txt")
+
 
 def test_copy_file_valid(tmp_path):
     src_file = tmp_path / "source.txt"
@@ -77,8 +80,9 @@ def test_find_files_in_directory_multiple(tmp_path):
 
     files = find_all_files_recursively(d)
     assert len(files) == 2
-    assert os.path.basename(files[0]) in ["testfile1.txt","testfile2.txt"]
-    assert os.path.basename(files[1]) in ["testfile1.txt","testfile2.txt"]
+    assert os.path.basename(files[0]) in ["testfile1.txt", "testfile2.txt"]
+    assert os.path.basename(files[1]) in ["testfile1.txt", "testfile2.txt"]
+
 
 def test_find_files_in_directory_recursively(tmp_path):
     d = tmp_path / "sub"
@@ -91,6 +95,7 @@ def test_find_files_in_directory_recursively(tmp_path):
     files = find_all_files_recursively(d)
     assert len(files) == 1
     assert os.path.basename(files[0]) == "testfile.txt"
+
 
 def test_find_files_in_directory_with_no_files(tmp_path):
     d = tmp_path / "sub"
@@ -164,6 +169,7 @@ def test_copy_all_files_recursively(tmp_path):
     assert os.path.isfile(dest_dir / "sub" / "file2.txt")
     assert os.path.isfile(dest_dir / "sub" / "subsub" / "file3.txt")
 
+
 def test_replace_file(tmp_path):
     p = tmp_path / "testfile.txt"
     p.write_text("content")
@@ -172,9 +178,11 @@ def test_replace_file(tmp_path):
 
     assert p.read_text() == "new content"
 
+
 def test_replace_file_dne(tmp_path):
     with pytest.raises(ValueError, match="Source is not a valid file"):
         replace_file(tmp_path / "nonexistent_file.txt", "new content")
+
 
 def test_replace_file_permission_denied(tmp_path):
     p = tmp_path / "testfile.txt"
@@ -183,4 +191,3 @@ def test_replace_file_permission_denied(tmp_path):
 
     with pytest.raises(PermissionError):
         replace_file(p, "new content")
-        
