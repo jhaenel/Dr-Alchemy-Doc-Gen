@@ -8,8 +8,8 @@ from src.file_ops.file_operations import (
 )
 
 
-def orchestrate():
-    copy_all_files("src", "doc_gen")
+def orchestrate(src:str):
+    copy_all_files(src, "doc_gen")
     for file in find_all_files_recursively("doc_gen"):
         replace_file(src=file, new_content=generate_comments(read_file(file)))
     create_machine_readable_copies("doc_gen", "doc_gen_machine_readable")
