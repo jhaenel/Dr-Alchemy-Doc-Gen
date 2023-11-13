@@ -136,8 +136,8 @@ deactivate
 ## Adding a requirement
 1. If not already done install pip-tools with `pip install pip-tools`
 2. Add a new dev requirements by adding the pip package name as a new line to `requirements-dev.in`
-3. Compile requirements with `pip-compile requirements-dev.in`
-4. Install dependencies with `pip install -r requirements-dev.txt`
+3. Compile dev requirements with `pip-compile requirements-dev.in` and non-dev requirments with `requirements.in`
+4. Install dependencies with `pip install -r requirements-dev.txt` or `requirements.txt` if it is a non-dev requirement
 
 ## Setting Editable mode
 If desired, using setup.py you can run  `pip install -e .`. You can read about the benefits here [stackoverflow](https://stackoverflow.com/questions/35064426/when-would-the-e-editable-option-be-useful-with-pip-install)
