@@ -107,7 +107,7 @@ Once activated, your terminal or command prompt should show the name of the virt
 ### 4. Install Your Dependencies
 
 ```bash
-pip install -r requirements-dev.txt
+pip install -r requirements-dev.txt -r requirements.txt
 ```
 
 ### 5. Set Open AI api key environmental variable
